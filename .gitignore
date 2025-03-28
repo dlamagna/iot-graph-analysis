@@ -1,0 +1,17 @@
+archive
+.venv
+.env
+dev
+*.csv
+*.pdf
+*.txt
+!requirements.txt
+
+aggregated_plots/*
+!aggregated_plots/.gitkeep
+
+plots/*
+!plots/.gitkeep
+
+__pycache__
+*.pyc
