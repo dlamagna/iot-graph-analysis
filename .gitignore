@@ -2,6 +2,7 @@ archive
 .venv
 .env
 dev
+new
 *.csv
 *.pdf
 *.txt
