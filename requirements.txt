@@ -8,3 +8,5 @@ tqdm
 ace_tools
 seaborn
 traceback-with-variables
+geopandas
+contextily
