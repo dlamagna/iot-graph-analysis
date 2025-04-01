@@ -6,8 +6,8 @@ from models import (
     graphical_lasso_with_and_without_pca,
     laplacian_graph,
     data_matrix_numeric,
-    run_laplacian_interpolation_demo,
 )
+from virtual import run_virtual_sensor
 import matplotlib.pyplot as plt
 import tqdm
 import networkx as nx
@@ -15,12 +15,12 @@ import numpy as np
 from visualization import plot_and_save_graphs, generate_aggregated_plots
 import os
 
-# Broadened Parameter Configurations
+# Parameter Configurations
 t_values = [1, 2, 4, 5, 7,5, 8.75, 10, 15, 25, 40, 50, 65, 80]
 theta_values = [1, 5, 10, 25.53, 40, 50]
 lambda_values = [1e-5, 5e-5, 0.0001, 0.001, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.4, 0.6, 0.7, 0.75, 0.8, 1, 1.5, 2]
-alpha_values = [10]
-beta_values = [1,1.5,2,2.5,3,3.5,4,4.5,5]
+alpha_values = [0.01, 0.1, 0.5, 1, 2, 2.5, 3, 4, 5, 7.5, 10, 25, 50]
+beta_values = [0.001, 0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 1, 2, 5, 10]
 
 results, graphs = [], {}
 
@@ -81,9 +81,20 @@ plot_and_save_graphs(
     sensor_values=sensor_values  # Use actual sensor means for coloring.
 )
 
-print("\n +++ Running Laplacian Interpolation Demo...")
-reconstructed = run_laplacian_interpolation_demo(graphs, node_locations_df, sensor_values)
-
 generate_aggregated_plots(csv_file="full_metrics_comparison_table.csv",
                           output_dir="aggregated_plots",
                           show_plots=False)
+
+
+# pick a sensor to reconstruct
+target_sensor = "sant adria"
+
+run_virtual_sensor(
+    data_matrix=data_matrix_numeric,
+    node_locations=node_location,
+    target_sensor_name=target_sensor,
+    dist_params=(25.53, 25),    # (theta, T)
+    glasso_param=0.75,
+    laplacian_params=(10, 2.5), # (alpha, beta)
+    output_dir="plots/virtual"
+)

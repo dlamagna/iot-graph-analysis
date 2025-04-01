@@ -331,9 +331,7 @@ def generate_aggregated_plots(csv_file="full_metrics_comparison_table.csv",
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce')
     
-    # -----------------------------
     # 1. Distance-Based Graphs
-    # -----------------------------
     df_distance = df[df["Method"] == "Distance-Based"]
     print("\nUnique Theta values (Distance-Based):", df_distance["Theta"].unique())
     
@@ -367,9 +365,7 @@ def generate_aggregated_plots(csv_file="full_metrics_comparison_table.csv",
         plt.show()
     plt.close()
     
-    # -----------------------------
     # 2. GLASSO Graphs
-    # -----------------------------
     df_glasso = df[df["Method"] == "GLASSO (Original)"]
     print("\nGLASSO DataFrame shape:", df_glasso.shape)
     if df_glasso.empty:
@@ -404,9 +400,7 @@ def generate_aggregated_plots(csv_file="full_metrics_comparison_table.csv",
         plt.show()
     plt.close()
     
-    # -----------------------------
     # 3. Laplacian-Based Graphs
-    # -----------------------------
     df_laplacian = df[df["Method"] == "Laplacian-Based"]
     
     # Heatmap for Edge Count (using 'Edges')
@@ -437,4 +431,4 @@ def generate_aggregated_plots(csv_file="full_metrics_comparison_table.csv",
         plt.show()
     plt.close()
     
-    print("✅ Aggregated plots generated and saved in", output_dir)
+    print("Aggregated plots generated and saved in", output_dir)
